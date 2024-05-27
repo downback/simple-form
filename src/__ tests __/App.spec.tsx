@@ -7,7 +7,7 @@ import '@testing-library/jest-dom';
 // 한번에 하나씩 순서대로 진행하세요.
 //  test.skip -> test
 
-test.skip('id field validation - min', () => {
+test('id field validation - min', () => {
     const { getByPlaceholderText, getByText } = render(<App />);
     const idInput = getByPlaceholderText('아이디');
 

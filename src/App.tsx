@@ -2,7 +2,9 @@ import './App.css';
 import TextField from './components/text-field.tsx';
 import Form from './components/form.tsx';
 
-// import { max, min } from './utils';
+import { required, email, min, max, match } from './utils/validators';
+
+// import { type } from './types/index';
 
 function App() {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -16,6 +18,7 @@ function App() {
         name: '',
         email: '',
     };
+
     return (
         <div
             style={{
@@ -30,9 +33,10 @@ function App() {
 
             <Form id={'join'} onSubmit={handleSubmit} initialData={initialData}>
                 <TextField
-                    name={'id'}
+                    name="id"
                     type="text"
                     placeholder="아이디"
+                    //validate={[required, min(5), max(15)]}
                     // validate={[min(5), max(15)]} {/*TODO: use min, max validators*/}
                 />
                 <TextField
@@ -40,6 +44,27 @@ function App() {
                     type="password"
                     placeholder="비밀번호"
                     // validate={[required]}
+                />
+                <TextField
+                    name={'password-confirm'}
+                    type="password"
+                    placeholder="비밀번호 확인"
+                    /*validate={[
+                        required,
+                        (value) => match(value)(initialData.password),
+                    ]}*/
+                />
+                <TextField
+                    name={'name'}
+                    type="text"
+                    placeholder="이름"
+                    // validate={[required]}
+                />
+                <TextField
+                    name={'email'}
+                    type="email"
+                    placeholder="이메일"
+                    // validate={[required, email]}
                 />
                 {/* TODO: create TextField for name, email and password confirm*/}
             </Form>
