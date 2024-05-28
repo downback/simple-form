@@ -2,8 +2,6 @@ import { FieldError } from '../types/index';
 
 /**
  * Validates if the input value is not empty.
- * @param value - The input value to be validated.
- * @returns An error object if the value is empty, otherwise `undefined`.
  */
 export const required = (value: string): FieldError | undefined => {
     return value.trim().length === 0
@@ -13,8 +11,6 @@ export const required = (value: string): FieldError | undefined => {
 
 /**
  * Validates if the input value is a valid email address.
- * @param value - The input value to be validated.
- * @returns An error object if the value is not a valid email, otherwise `undefined`.
  */
 export const email = (value: string): FieldError | undefined => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -25,8 +21,6 @@ export const email = (value: string): FieldError | undefined => {
 
 /**
  * Validates if the input value has a minimum length.
- * @param minLength - The minimum length required for the input value.
- * @returns A function that takes the input value and returns an error object if the value is too short, otherwise `undefined`.
  */
 export const min =
     (minLength: number) =>
@@ -41,8 +35,6 @@ export const min =
 
 /**
  * Validates if the input value has a maximum length.
- * @param maxLength - The maximum length allowed for the input value.
- * @returns A function that takes the input value and returns an error object if the value is too long, otherwise `undefined`.
  */
 export const max =
     (maxLength: number) =>
@@ -57,8 +49,6 @@ export const max =
 
 /**
  * Validates if the input value matches the confirmation value.
- * @param confirmationValue - The value to be matched.
- * @returns A function that takes the input value and returns an error object if the values don't match, otherwise `undefined`.
  */
 export const match =
     (confirmationValue: string) =>

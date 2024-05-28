@@ -2,7 +2,7 @@ import './App.css';
 import TextField from './components/text-field.tsx';
 import Form from './components/form.tsx';
 
-import { required, email, min, max, match } from './utils/validators';
+// import { required, min, max } from './utils';
 
 // import { type } from './types/index';
 
