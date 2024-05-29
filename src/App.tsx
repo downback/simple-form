@@ -32,6 +32,7 @@ function App() {
             <p>회원가입을 위해 아래 정보를 입력해주세요.</p>
 
             <Form id={'join'} onSubmit={handleSubmit} initialData={initialData}>
+                {/*initialData를 넘겨주고 거기서 type 을 정의해줘도 되는가보오?*/}
                 <TextField
                     name="id"
                     type="text"
@@ -39,12 +40,15 @@ function App() {
                     //validate={[required, min(5), max(15)]}
                     // validate={[min(5), max(15)]} {/*TODO: use min, max validators*/}
                 />
+
                 <TextField
                     name={'password'}
                     type="password"
                     placeholder="비밀번호"
                     // validate={[required]}
                 />
+
+                {/*
                 <TextField
                     name={'password-confirm'}
                     type="password"
@@ -52,7 +56,7 @@ function App() {
                     /*validate={[
                         required,
                         (value) => match(value)(initialData.password),
-                    ]}*/
+                    ]}
                 />
                 <TextField
                     name={'name'}
@@ -65,7 +69,8 @@ function App() {
                     type="email"
                     placeholder="이메일"
                     // validate={[required, email]}
-                />
+                /> */}
+
                 {/* TODO: create TextField for name, email and password confirm*/}
             </Form>
             <button

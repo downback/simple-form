@@ -5,7 +5,10 @@ interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
     children: ReactElement<FieldProps>[];
     initialData: FormData;
 }
+//FormProps는 왜 types/index.ts에서 declare 하지 않는건가요??
 
+//This function is useful for initializing the error state for a form,
+//ensuring that each field starts with a default success state and no error message.
 const getInitialError = (data?: FormData) => {
     const error: FormError = {};
     for (const key in data) {
