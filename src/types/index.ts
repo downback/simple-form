@@ -7,7 +7,7 @@ export type FieldError = {
 
 export interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
     name: string;
-    validate?: ((v: string) => FieldError)[];
+    validate?: ((v: string) => FieldError)[] | undefined;
     value?: string;
     error?: FieldError;
     setValue?: (v: string) => void;

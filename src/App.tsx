@@ -2,9 +2,9 @@ import './App.css';
 import TextField from './components/text-field.tsx';
 import Form from './components/form.tsx';
 
-// import { required, min, max } from './utils';
+import { required, min, max, email, match } from './utils';
 
-// import { type } from './types/index';
+import { FieldError } from './types';
 
 function App() {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -45,31 +45,48 @@ function App() {
                     name={'password'}
                     type="password"
                     placeholder="비밀번호"
-                    // validate={[required]}
+                    //validate={[required]}
+                    validate={[required, (v) => max(50)(v)]}
                 />
 
-                {/*
                 <TextField
                     name={'password-confirm'}
                     type="password"
                     placeholder="비밀번호 확인"
-                    /*validate={[
+                    validate={[
                         required,
-                        (value) => match(value)(initialData.password),
+                        (value): FieldError => {
+                            if (value === initialData.password) {
+                                return { success: true };
+                            } else {
+                                return {
+                                    success: false,
+                                    message: 'Passwords do not match',
+                                };
+                            }
+                        },
                     ]}
                 />
+
+                {/* <TextField
+                    name={'password-confirm'}
+                    type='text'
+                    placeholder='비밀번호 확인'
+                    validate={[required, match('password')]}
+                /> //이 방법도 해보려고 했는데 에러를 해결 못했음 + 뭐가 나은 방식인지 잘 모르겠어요*/}
+
                 <TextField
                     name={'name'}
                     type="text"
                     placeholder="이름"
-                    // validate={[required]}
+                    validate={[required]}
                 />
                 <TextField
                     name={'email'}
                     type="email"
                     placeholder="이메일"
-                    // validate={[required, email]}
-                /> */}
+                    validate={[required, email]}
+                />
 
                 {/* TODO: create TextField for name, email and password confirm*/}
             </Form>
