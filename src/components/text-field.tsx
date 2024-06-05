@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { FieldProps, FieldError } from '../types';
+import { FieldProps } from '../types';
 //import { required } from '../utils';
 
 /*
@@ -7,42 +6,35 @@ import { FieldProps, FieldError } from '../types';
  **/
 const TextField = ({
     validate,
-    // error = {
-    //     success: true,
-    // },
-    error,
+    error = {
+        success: true,
+    },
     value,
     setValue,
     setError,
     ...rest
 }: FieldProps) => {
-    const [currentValue, setCurrentValue] = useState(value);
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //  const v = e.target.value;
-     //   setValue?.(v);
+        const v = e.target.value;
+        setValue?.(v);
 
-     const newValue = e.target.value;
-     setCurrentValue(newValue);
+        // Validate the input using if statements
+        if (validate) {
+            for (const validator of validate) {
+                const validationResult = validator(v);
+                if (!validationResult.success) {
+                    error = validationResult;
+                    break;
+                }
+            }
+            if (setError) {
+                setError(error);
+            }
+        }
 
-     // Validate the input using if statements
-     let newError: FieldError = { success: true };
-     for (const validator of validate) {
-         const validationResult = validator(newValue);
-         if (!validationResult.success) {
-             newError = validationResult;
-             break;
-         }
-     }
-
-     if (setError) {
-         setError(newError);
-     }
-
-     if (setValue) {
-         setValue(newValue);
-     }
- };
+        if (setValue) {
+            setValue(v);
+        }
 
         // TODO: validation
         // 1. when there is validate function, execute the validate function and set error messages.
@@ -52,12 +44,12 @@ const TextField = ({
 
     return (
         <div className={'text-field'}>
-            <input value={currentValue} onChange={handleChange} {...rest} />
-            {/* <div className={'error-message'}>
-                {!error.success && (
-                    <p id={`${rest.name}-error`}>{error.message}</p>
+            <input value={value} onChange={handleChange} {...rest} />
+            <div className={'error-message'}>
+                {error.success === false && (
+                    <p id={`${rest.name}-error`}>{error.message ?? ''}</p>
                 )}
-            </div> */}
+            </div>
             {/* {error?.message && <div>{error.message}</div>} */}
         </div>
     );

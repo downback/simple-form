@@ -6,6 +6,7 @@ interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
     initialData: FormData;
 }
 //FormProps는 왜 types/index.ts에서 declare 하지 않는건가요??
+//:해당 컴포넌트 프롭스들은 그 컴포넌트 파일에 선언하는 것이 일반적.
 
 //This function is useful for initializing the error state for a form,
 //ensuring that each field starts with a default success state and no error message.
@@ -22,8 +23,9 @@ const getInitialError = (data?: FormData) => {
 
 const Form = (props: FormProps) => {
     const [values, setValues] = useState<FormData>(props.initialData);
-    const [errors, setErrors] = useState<FormError>();
-    getInitialError(props.initialData);
+    const [errors, setErrors] = useState<FormError>(
+        getInitialError(props.initialData)
+    );
 
     return (
         <form id={props.id} onSubmit={props.onSubmit}>

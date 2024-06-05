@@ -20,7 +20,7 @@ export const min =
         if (v.length < min) {
             return {
                 success: false,
-                message: `${min}자 이상 입력하세요.`,
+                message: `최소 ${min}자 이상 입력해주세요.`,
             };
         }
         return {
@@ -34,7 +34,7 @@ export const max =
         if (v.length > max) {
             return {
                 success: false,
-                message: `${max}자 미만으로 입력하세요.`,
+                message: `최대 ${max}자 이하로 입력해주세요.`,
             };
         }
         return {

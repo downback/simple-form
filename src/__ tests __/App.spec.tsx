@@ -17,7 +17,7 @@ test('id field validation - min', () => {
     expect(errorMessage).toBeInTheDocument();
 });
 
-test.skip('id field validation - max', () => {
+test('id field validation - max', () => {
     const { getByPlaceholderText, getByText } = render(<App />);
     const idInput = getByPlaceholderText('아이디');
 
@@ -27,21 +27,21 @@ test.skip('id field validation - max', () => {
     expect(errorMessage).toBeInTheDocument();
 });
 
-test.skip('name field exists', () => {
+test('name field exists', () => {
     const { getByPlaceholderText } = render(<App />);
     const nameInput = getByPlaceholderText('이름');
 
     expect(nameInput).toBeInTheDocument();
 });
 
-test.skip('email field exists', () => {
+test('email field exists', () => {
     const { getByPlaceholderText } = render(<App />);
     const emailInput = getByPlaceholderText('이메일');
 
     expect(emailInput).toBeInTheDocument();
 });
 
-test.skip('password-confirm field exists', () => {
+test('password-confirm field exists', () => {
     const { getByPlaceholderText } = render(<App />);
     const passwordConfirmInput = getByPlaceholderText('비밀번호 확인');
 

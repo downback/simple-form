@@ -2,9 +2,9 @@ import './App.css';
 import TextField from './components/text-field.tsx';
 import Form from './components/form.tsx';
 
-import { required, min, max, email, match } from './utils';
+import { required, min, max, email } from './utils';
 
-import { FieldError } from './types';
+// import { FieldError } from './types';
 
 function App() {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -37,35 +37,33 @@ function App() {
                     name="id"
                     type="text"
                     placeholder="아이디"
-                    //validate={[required, min(5), max(15)]}
-                    // validate={[min(5), max(15)]} {/*TODO: use min, max validators*/}
+                    validate={[required, min(5), max(15)]}
                 />
 
                 <TextField
                     name={'password'}
                     type="password"
                     placeholder="비밀번호"
-                    //validate={[required]}
-                    validate={[required, (v) => max(50)(v)]}
+                    // validate={[required, (v) => max(50)(v)]}
                 />
 
                 <TextField
                     name={'password-confirm'}
                     type="password"
                     placeholder="비밀번호 확인"
-                    validate={[
-                        required,
-                        (value): FieldError => {
-                            if (value === initialData.password) {
-                                return { success: true };
-                            } else {
-                                return {
-                                    success: false,
-                                    message: 'Passwords do not match',
-                                };
-                            }
-                        },
-                    ]}
+                    // validate={[
+                    //     required,
+                    //     (value): FieldError => {
+                    //         if (value === initialData.password) {
+                    //             return { success: true };
+                    //         } else {
+                    //             return {
+                    //                 success: false,
+                    //                 message: 'Passwords do not match',
+                    //             };
+                    //         }
+                    //     },
+                    // ]}
                 />
 
                 {/* <TextField
