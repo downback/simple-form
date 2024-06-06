@@ -6,7 +6,8 @@ export const required = (v: string): FieldError => {
     if (!v) {
         return {
             success: false,
-            message: '필수 입력 항목입니다.',
+            // message: '필수 입력 항목입니다.',
+            message: '값을 입력해주세요.',
         };
     }
     return {
@@ -49,10 +50,25 @@ export const max =
 
 export const email = (v: string): FieldError => {
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-    if (!emailRegex.test(v)) {
+    const extraCharactersRegex = /\.[A-Za-z]{2,}\..+$/;
+    if (!emailRegex.test(v) || extraCharactersRegex.test(v)) {
         return {
             success: false,
-            message: '이메일 형식이 아닙니다.',
+            message: '이메일 형식에 맞게 입력해주세요.',
+        };
+    }
+    return {
+        success: true,
+    };
+};
+
+export const password = (v: string): FieldError => {
+    // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+    const passwordRegex = /^[A-Za-z0-9]*$/;
+    if (!passwordRegex.test(v)) {
+        return {
+            success: false,
+            message: '비밀번호는 영문, 숫자만 입력 가능합니다.',
         };
     }
     return {
@@ -62,10 +78,18 @@ export const email = (v: string): FieldError => {
 
 //여기서 이 function을 만들어서 export해서 App에서 써야하는지 잘 모르겠어여....
 
+// export const match =
+//     (confirmationValue: string) =>
+//     (v: string): FieldError | undefined => {
+//         return v === confirmationValue
+//             ? undefined
+//             : { message: '비밀번호가 일치하지 않습니다.', success: false };
+//     };
+
 export const match =
     (confirmationValue: string) =>
-    (v: string): FieldError | undefined => {
+    (v: string): FieldError => {
         return v === confirmationValue
-            ? undefined
+            ? { success: true }
             : { message: '비밀번호가 일치하지 않습니다.', success: false };
     };

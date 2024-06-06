@@ -20,6 +20,7 @@ const TextField = ({
 
         // Validate the input using if statements
         if (validate) {
+            //const validationError: FieldError | null = null;
             for (const validator of validate) {
                 const validationResult = validator(v);
                 if (!validationResult.success) {
@@ -30,27 +31,27 @@ const TextField = ({
             if (setError) {
                 setError(error);
             }
+            // if (setError) {
+            //     setError(validationError || { success: true });
+            // }
         }
 
         if (setValue) {
             setValue(v);
         }
-
-        // TODO: validation
-        // 1. when there is validate function, execute the validate function and set error messages.
-        // 2. when there is an error, call setError function and set error messages.
-        // 3. when there is no error, set success to true.
     };
 
     return (
         <div className={'text-field'}>
             <input value={value} onChange={handleChange} {...rest} />
             <div className={'error-message'}>
+                {/* {error.success === false && error.message && (
+                    <p id={`${rest.name}-error`}>{error.message}</p>
+                )} */}
                 {error.success === false && (
                     <p id={`${rest.name}-error`}>{error.message ?? ''}</p>
                 )}
             </div>
-            {/* {error?.message && <div>{error.message}</div>} */}
         </div>
     );
 };

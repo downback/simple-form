@@ -2,7 +2,7 @@ import './App.css';
 import TextField from './components/text-field.tsx';
 import Form from './components/form.tsx';
 
-import { required, min, max, email } from './utils';
+import { required, min, max, email, password, match } from './utils';
 
 // import { FieldError } from './types';
 
@@ -44,34 +44,40 @@ function App() {
                     name={'password'}
                     type="password"
                     placeholder="비밀번호"
-                    // validate={[required, (v) => max(50)(v)]}
-                />
-
-                <TextField
-                    name={'password-confirm'}
-                    type="password"
-                    placeholder="비밀번호 확인"
-                    // validate={[
-                    //     required,
-                    //     (value): FieldError => {
-                    //         if (value === initialData.password) {
-                    //             return { success: true };
-                    //         } else {
-                    //             return {
-                    //                 success: false,
-                    //                 message: 'Passwords do not match',
-                    //             };
-                    //         }
-                    //     },
-                    // ]}
+                    validate={[required, password, min(8), max(20)]}
                 />
 
                 {/* <TextField
                     name={'password-confirm'}
-                    type='text'
-                    placeholder='비밀번호 확인'
-                    validate={[required, match('password')]}
-                /> //이 방법도 해보려고 했는데 에러를 해결 못했음 + 뭐가 나은 방식인지 잘 모르겠어요*/}
+                    type="password"
+                    placeholder="비밀번호 확인"
+                    validate={[
+                        required,
+                        (value): FieldError => {
+                            if (value === initialData.password) {
+                                return { success: true };
+                            } else {
+                                return {
+                                    success: false,
+                                    message: 'Passwords do not match',
+                                };
+                            }
+                        },
+                    ]}
+                /> */}
+
+                <TextField
+                    name={'password-confirm'}
+                    type="text"
+                    placeholder="비밀번호 확인"
+                    validate={[
+                        required,
+                        password,
+                        match('password'),
+                        min(8),
+                        max(20),
+                    ]}
+                />
 
                 <TextField
                     name={'name'}
@@ -79,6 +85,7 @@ function App() {
                     placeholder="이름"
                     validate={[required]}
                 />
+
                 <TextField
                     name={'email'}
                     type="email"
