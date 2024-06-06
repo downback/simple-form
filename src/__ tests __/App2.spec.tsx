@@ -154,3 +154,13 @@ test('password-confirm field validation - match', () => {
 });
 
 //validation을 통과했는데도 에러메세지가 뜨는 경우를 방지하기 위해 아래와 같은 테스트도 필요하다고 생각했는데 맞을까요?
+// 에러메세지 안뜨는지 테스트
+test.skip('name field validation - proper value', () => {
+    const { getByPlaceholderText, getByText } = render(<App />);
+    const nameInput = getByPlaceholderText('이름');
+
+    fireEvent.change(nameInput, { target: { value: 'Hannah' } });
+
+    const errorMessage = getByText('');
+    expect(!errorMessage).toBeInTheDocument();
+});
