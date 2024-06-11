@@ -1,5 +1,4 @@
 import { FieldProps } from '../types';
-//import { required } from '../utils';
 
 /*
  * TextField 컴포넌트는 input 요소를 렌더링하고, 에러 메시지를 표시합니다.
@@ -20,7 +19,6 @@ const TextField = ({
 
         // Validate the input using if statements
         if (validate) {
-            //const validationError: FieldError | null = null;
             for (const validator of validate) {
                 const validationResult = validator(v);
                 if (!validationResult.success) {
@@ -31,9 +29,6 @@ const TextField = ({
             if (setError) {
                 setError(error);
             }
-            // if (setError) {
-            //     setError(validationError || { success: true });
-            // }
         }
 
         if (setValue) {

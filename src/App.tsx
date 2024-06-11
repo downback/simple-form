@@ -47,25 +47,6 @@ function App() {
                     validate={[required, password, min(8), max(20)]}
                 />
 
-                {/* <TextField
-                    name={'password-confirm'}
-                    type="password"
-                    placeholder="비밀번호 확인"
-                    validate={[
-                        required,
-                        (value): FieldError => {
-                            if (value === initialData.password) {
-                                return { success: true };
-                            } else {
-                                return {
-                                    success: false,
-                                    message: 'Passwords do not match',
-                                };
-                            }
-                        },
-                    ]}
-                /> */}
-
                 <TextField
                     name={'password-confirm'}
                     type="text"

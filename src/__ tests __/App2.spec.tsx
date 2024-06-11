@@ -141,6 +141,7 @@ test('password field validation - invalid character', () => {
 // NOTE: 아래 테스트 코드는 password-confirm과 password가 일치하는지 확인하는 테스트입니다.
 // 그런데 현재 상태에서는 password와 password-confirm이 일치하는지 확인하는 것이 불가능합니다.
 // TODO: 그 이유를 설명해주세요.(password와 password-confirm의 value를 APP.tsx에서 비교하는 것이 불가능한 이유)
+// React에서는 input field의 state가 각각 관리되어, 부모 컴포넌트에서 자식 컴포넌트의 state를 직접적으로 접근할 수 없기 때문에 APP.tsx에서 비교하는 것은 불가능하다.
 test('password-confirm field validation - match', () => {
     const { getByPlaceholderText, getByText } = render(<App />);
     const passwordInput = getByPlaceholderText('비밀번호');
@@ -154,13 +155,15 @@ test('password-confirm field validation - match', () => {
 });
 
 //validation을 통과했는데도 에러메세지가 뜨는 경우를 방지하기 위해 아래와 같은 테스트도 필요하다고 생각했는데 맞을까요?
-// 에러메세지 안뜨는지 테스트
-test.skip('name field validation - proper value', () => {
-    const { getByPlaceholderText, getByText } = render(<App />);
+// 에러메세지 안뜨는지 테스트 -> 지금 잘 동작하지 않는 것 같아요..
+test('name field validation - proper value', () => {
+    const { getByPlaceholderText, queryAllByTestId } = render(<App />);
     const nameInput = getByPlaceholderText('이름');
 
     fireEvent.change(nameInput, { target: { value: 'Hannah' } });
 
-    const errorMessage = getByText('');
-    expect(!errorMessage).toBeInTheDocument();
+    const errorMessages = queryAllByTestId((_, el) =>
+        el ? el.id.endsWith('-error') : false
+    );
+    expect(errorMessages).toHaveLength(0);
 });
