@@ -19,20 +19,17 @@ const TextField = ({
 
         // Validate the input using if statements
         if (validate) {
+            let newError = {
+                success: true,
+            };
             for (const validator of validate) {
                 const validationResult = validator(v);
                 if (!validationResult.success) {
-                    error = validationResult;
+                    newError = validationResult;
                     break;
                 }
             }
-            if (setError) {
-                setError(error);
-            }
-        }
-
-        if (setValue) {
-            setValue(v);
+            setError?.(newError);
         }
     };
 
@@ -44,7 +41,12 @@ const TextField = ({
                     <p id={`${rest.name}-error`}>{error.message}</p>
                 )} */}
                 {error.success === false && (
-                    <p id={`${rest.name}-error`}>{error.message ?? ''}</p>
+                    <p
+                        id={`${rest.name}-error`}
+                        data-testid={`${rest.name}-error`}
+                    >
+                        {error.message ?? ''}
+                    </p>
                 )}
             </div>
         </div>

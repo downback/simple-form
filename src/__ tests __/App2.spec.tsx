@@ -157,13 +157,11 @@ test('password-confirm field validation - match', () => {
 //validation을 통과했는데도 에러메세지가 뜨는 경우를 방지하기 위해 아래와 같은 테스트도 필요하다고 생각했는데 맞을까요?
 // 에러메세지 안뜨는지 테스트 -> 지금 잘 동작하지 않는 것 같아요..
 test('name field validation - proper value', () => {
-    const { getByPlaceholderText, queryAllByTestId } = render(<App />);
+    const { getByPlaceholderText, queryByTestId } = render(<App />);
     const nameInput = getByPlaceholderText('이름');
 
     fireEvent.change(nameInput, { target: { value: 'Hannah' } });
 
-    const errorMessages = queryAllByTestId((_, el) =>
-        el ? el.id.endsWith('-error') : false
-    );
-    expect(errorMessages).toHaveLength(0);
+    const errorMessages = queryByTestId('name-error');
+    expect(errorMessages).toBeNull();
 });
